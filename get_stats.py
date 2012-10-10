@@ -6,6 +6,11 @@ Checks the status of the washing machines at Berg Studentby, Trondheim, and logs
 Data is written to a new file every day, in the format 
 {machine name}: {busy_interval_start}-{busy_interval_end}, {busy_interval2_start}-{busy_interval2_end}
 
+The internal data structure, the dict stats, is constructed like this:
+stats[machine_id] = [(starttime, endtime), (starttime2, endtime2)]
+
+or, in the event that a wash isnt completed yet, the last entry for a machine is the tuple (starttime, None).
+
 A pure counter is written, in the format 
     {timestamp} {num_machines } / {num_occupied} / {num_broken_down}
     
@@ -39,6 +44,7 @@ def run():
     page = get_page(URL, user, pw)
     soup = BeautifulSoup(page)
     stats = get_old_data()
+    logging.debug('Old data: ' + str(stats))
     analyze(soup, stats)
     save(stats)
     
@@ -67,40 +73,64 @@ def analyze(soup, stats):
             name = td.find('b').get_text()
             machine_id = get_machine_id(name)
             status = td.find('br').get_text()
-            clean = clean_status(status)
+            status = get_status(status)
             times_occupied = stats.get(machine_id, [])
-            if clean: 
-                times_occupied.append(clean)
+            if status is Machine.OCCUPIED:
+                if times_occupied and times_occupied[-1][1] is None:
+                    # Still running
+                    logging.info('%s is still running.', machine_id)
+                else:
+                    # New run found
+                    start = get_time_formatted()
+                    stat_entry = (start, None)
+                    logging.info('%s has been started.', machine_id)
+                    times_occupied.append(stat_entry)
+            elif status is Machine.AVAILABLE:
+                # Free
+                if times_occupied and times_occupied[-1][1] is None:
+                    # Last time it was running
+                    logging.info('%s has finished, and is available.', machine_id)
+                    last_entry = times_occupied[-1]
+                    del times_occupied[-1]
+                    new_entry = (last_entry[0], get_time_formatted())
+                    times_occupied.append(new_entry)
+                else:
+                    # No change
+                    logging.info('%s is available', machine_id)
+            elif status is Machine.BROKEN_DOWN:
+                if times_occupied and times_occupied[-1] == 'Ute av drift':
+                    # Broken down
+                    logging.info('%s is broken down.', machine_id)
+                else:
+                    times_occupied.append('Ute av drift')
+                    logging.info('%s is still broken down.', machine_id)
+                
             stats[machine_id] = times_occupied
     return stats
             
-def clean_status(status):
+def get_status(status):
     global num_taken
     global num_broken_down
     stat_entry = None
     if status.startswith('Resttid: '):
-        start_of_time_index = status.find(': ') + 2
-        min_remaining = int(status[start_of_time_index:status.find(' min')])
-        min_since_start = AVG_WASH_DURATION - min_remaining
-        starttime = time.time() - min_since_start * 60
-        endtime = time.time() + min_remaining * 60
-        start = get_time_formatted('%H:%M', starttime)
-        end = get_time_formatted('%H:%M', endtime)
-        stat_entry = '%s-%s' % (start, end)
+        start = get_time_formatted()
+        stat_entry = '%s-%s' % (start, None)
         num_taken += 1
+        return Machine.OCCUPIED
     elif status == 'Opptatt':
-        start = get_time_formatted('%H:%M')
-        end_time = time.time() + AVG_WASH_DURATION * 60
-        end = get_time_formatted('%H:%M', end_time)
-        stat_entry = '%s-%s' % (start, end)
+        start = get_time_formatted()
+        stat_entry = '%s-%s' % (start, None)
         num_taken += 1
+        return Machine.OCCUPIED
     elif status.startswith('Ute av drift'):
         stat_entry = status
         num_broken_down += 1
+        return Machine.BROKEN_DOWN
     elif status.startswith('Ledig '):
-        pass
+        return Machine.AVAILABLE
     else:
         logging.warning('Ukjent status: %s', status)
+        return Machine.UNKNOWN
     return stat_entry
 
 def save(stats):
@@ -110,15 +140,16 @@ def save(stats):
         machines.sort()
         for machine in machines:
             file_obj.write(machine + ': ')
-            file_obj.write(', '.join(stats[machine]))
+            file_obj.write(', '.join(str(entry) for entry in stats[machine]))
             file_obj.write('\n')
     with open(DATA_DIR + filename + '.pickle', 'w+') as file_obj:
         pickle.dump(stats, file_obj)
     with open(DATA_DIR + 'counter.txt', 'a+') as file_obj:
         current_time = get_time_formatted('%d.%m.%y %H:%M')
         file_obj.write('%s %d / %d / %d\n' % (current_time, num_total, num_taken, num_broken_down))
+    logging.debug(stats)
     
-def get_time_formatted(time_format, timestamp=None):
+def get_time_formatted(time_format='%H:%M', timestamp=None):
     if timestamp is None:
         timestamp = time.time()
     localtime = time.localtime(timestamp)
@@ -139,6 +170,12 @@ def get_old_data():
         
         return {}
     
+class Machine(object):
+    OCCUPIED = 1
+    AVAILABLE = 2
+    BROKEN_DOWN = 3 
+    UNKNOWN = 4
+
 def get_machine_id(machine_name):
     machine_num = int(machine_name.split()[1])
     machine_id = 'Machine #%2d' % machine_num
