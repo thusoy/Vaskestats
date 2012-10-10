@@ -100,10 +100,10 @@ def analyze(soup, stats):
             elif status is Machine.BROKEN_DOWN:
                 if times_occupied and times_occupied[-1] == 'Ute av drift':
                     # Broken down
-                    logging.info('%s is broken down.', machine_id)
+                    logging.info('%s is still broken down.', machine_id)
                 else:
                     times_occupied.append('Ute av drift')
-                    logging.info('%s is still broken down.', machine_id)
+                    logging.info('%s has broken down.', machine_id)
                 
             stats[machine_id] = times_occupied
     return stats
