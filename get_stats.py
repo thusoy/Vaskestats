@@ -1,3 +1,4 @@
+#!python3
 #coding: utf-8
 
 '''
@@ -21,42 +22,39 @@ Dependencies:
     - An account to log into the system, user and pw stored in LOGIN_DATA
 
 Tarjei Husøy, 2012
+
+Licensed under a new-style BSD license, see LICENSE.txt.
+
+
 '''
+
+__author__ = 'Tarjei Husøy (admin@husoymedia.no)'
+__version__ = 0.2
+__copyright__ = 'Copyright (c) 2012 Tarjei Husøy'
+__licencse__ = 'BSD'
+__status__ = 'Development'
 
 from bs4 import BeautifulSoup
 from contextlib import closing
-import cPickle as pickle
+import pickle
 import os
 import time
-import urllib2
+from urllib import request
 import logging
 
 URL = 'http://129.241.126.11/LaundryState?lg=2&ly=9106'
 LOGIN_DATA = 'C:/login_data.txt'
 DATA_DIR = 'data/'
-AVG_WASH_DURATION = 46
-num_taken = 0
-num_broken_down = 0
-num_total = 0
 
 def run():
     user, pw = get_user_and_pw()
     page = get_page(URL, user, pw)
     soup = BeautifulSoup(page)
+    logging.debug(page)
     stats = get_old_data()
-    logging.debug('Old data: ' + str(stats))
     analyze(soup, stats)
     save(stats)
     
-def get_page(url, user, pw):
-    password_manager = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    password_manager.add_password(None, url, user, pw)
-    authhandler = urllib2.HTTPDigestAuthHandler(password_manager)
-    opener = urllib2.build_opener(authhandler)
-    urllib2.install_opener(opener)
-    with closing(urllib2.urlopen(url)) as response:
-        return response.read()
-        
 def get_user_and_pw():
     with open(LOGIN_DATA) as file_obj:
         lines = file_obj.readlines()
@@ -64,101 +62,16 @@ def get_user_and_pw():
         pw = lines[1].strip()
         logging.info('''Using account '%s'.''', user)
         return user, pw
-
-def analyze(soup, stats):
-    global num_total
-    for table in soup.find_all('table', class_='tb'):
-        for td in table.find_all('td', class_='p'):
-            num_total += 1
-            name = td.find('b').get_text()
-            machine_id = get_machine_id(name)
-            status = td.find('br').get_text()
-            status = get_status(status)
-            times_occupied = stats.get(machine_id, [])
-            if status is Machine.OCCUPIED:
-                if times_occupied and times_occupied[-1][1] is None:
-                    # Still running
-                    logging.info('%s is still running.', machine_id)
-                else:
-                    # New run found
-                    start = get_time_formatted()
-                    stat_entry = (start, None)
-                    logging.info('%s has been started.', machine_id)
-                    times_occupied.append(stat_entry)
-            elif status is Machine.AVAILABLE:
-                # Free
-                if times_occupied and times_occupied[-1][1] is None:
-                    # Last time it was running
-                    logging.info('%s has finished, and is available.', machine_id)
-                    last_entry = times_occupied[-1]
-                    del times_occupied[-1]
-                    new_entry = (last_entry[0], get_time_formatted())
-                    times_occupied.append(new_entry)
-                else:
-                    # No change
-                    logging.info('%s is available', machine_id)
-            elif status is Machine.BROKEN_DOWN:
-                if times_occupied and times_occupied[-1] == 'Ute av drift':
-                    # Broken down
-                    logging.info('%s is still broken down.', machine_id)
-                else:
-                    times_occupied.append('Ute av drift')
-                    logging.info('%s has broken down.', machine_id)
-                
-            stats[machine_id] = times_occupied
-    return stats
-            
-def get_status(status):
-    global num_taken
-    global num_broken_down
-    stat_entry = None
-    if status.startswith('Resttid: '):
-        start = get_time_formatted()
-        stat_entry = '%s-%s' % (start, None)
-        num_taken += 1
-        return Machine.OCCUPIED
-    elif status == 'Opptatt':
-        start = get_time_formatted()
-        stat_entry = '%s-%s' % (start, None)
-        num_taken += 1
-        return Machine.OCCUPIED
-    elif status.startswith('Ute av drift'):
-        stat_entry = status
-        num_broken_down += 1
-        return Machine.BROKEN_DOWN
-    elif status.startswith('Ledig '):
-        return Machine.AVAILABLE
-    else:
-        logging.warning('Ukjent status: %s', status)
-        return Machine.UNKNOWN
-    return stat_entry
-
-def save(stats):
-    filename = get_todays_filename()
-    with open(DATA_DIR + filename + '.txt', 'w+') as file_obj:
-        machines = stats.keys()
-        machines.sort()
-        for machine in machines:
-            file_obj.write(machine + ': ')
-            file_obj.write(', '.join(str(entry) for entry in stats[machine]))
-            file_obj.write('\n')
-    with open(DATA_DIR + filename + '.pickle', 'w+') as file_obj:
-        pickle.dump(stats, file_obj)
-    with open(DATA_DIR + 'counter.txt', 'a+') as file_obj:
-        current_time = get_time_formatted('%d.%m.%y %H:%M')
-        file_obj.write('%s %d / %d / %d\n' % (current_time, num_total, num_taken, num_broken_down))
-    logging.debug(stats)
     
-def get_time_formatted(time_format='%H:%M', timestamp=None):
-    if timestamp is None:
-        timestamp = time.time()
-    localtime = time.localtime(timestamp)
-    return time.strftime(time_format, localtime)
-
-def get_todays_filename():
-    date = get_time_formatted('%d-%m-%y')
-    return date
-
+def get_page(url, user, pw):
+    password_manager = request.HTTPPasswordMgrWithDefaultRealm()
+    password_manager.add_password(None, url, user, pw)
+    authhandler = request.HTTPDigestAuthHandler(password_manager)
+    opener = request.build_opener(authhandler)
+    request.install_opener(opener)
+    with closing(request.urlopen(url)) as response:
+        return response.read()
+        
 def get_old_data():
     filename = get_todays_filename() + '.pickle'
     try:
@@ -167,18 +80,138 @@ def get_old_data():
     except:
         # First run of the day
         #TODO Old dumps will be aggregating, delete all except the last one.
-        
         return {}
-    
-class Machine(object):
-    OCCUPIED = 1
-    AVAILABLE = 2
-    BROKEN_DOWN = 3 
-    UNKNOWN = 4
 
+def analyze(soup, stats):
+    for machine in find_statuses(soup):
+        times_occupied = stats.get(machine, [])
+        if isinstance(machine, OccupiedMachine):
+            if times_occupied and times_occupied[-1][1] is None:
+                # Still running
+                logging.info('%s is still running.', machine)
+            else:
+                # New run found
+                start = get_time_formatted()
+                stat_entry = (start, None)
+                logging.info('%s has been started.', machine)
+                times_occupied.append(stat_entry)
+        elif isinstance(machine, AvailableMachine):
+            if times_occupied and times_occupied[-1][1] is None:
+                # Last time we checked it was running
+                logging.info('%s has finished, and is available.', machine)
+                last_entry = times_occupied[-1]
+                del times_occupied[-1]
+                new_entry = (last_entry[0], get_time_formatted())
+                times_occupied.append(new_entry)
+            else:
+                # No change
+                logging.info('%s is available', machine)
+        elif isinstance(machine, BrokenDownMachine):
+            if times_occupied and times_occupied[-1] == 'Ute av drift':
+                # No change
+                logging.info('%s is still broken down.', machine)
+            else:
+                # New machine has broken down
+                times_occupied.append('Ute av drift')
+                logging.info('%s has broken down.', machine)
+        elif isinstance(machine, UnknownMachine):
+            logging.warning('%s has an unknown status: %s', machine, machine.status)
+        stats[machine] = times_occupied
+            
+def save(stats):
+    filename = get_todays_filename()
+    with open(DATA_DIR + filename + '.txt', 'w+') as file_obj:
+        machines = sorted(stats.keys(), key=lambda m: m.machine_id)
+        for machine in machines:
+            file_obj.write('%s: ' % machine)
+            file_obj.write(', '.join(str(entry) for entry in stats[machine]))
+            file_obj.write('\n')
+    with open(DATA_DIR + filename + '.pickle', 'wb+') as file_obj:
+        pickle.dump(stats, file_obj)
+    with open(DATA_DIR + 'counter.txt', 'a') as file_obj:
+        current_time = get_time_formatted('%d.%m.%y %H:%M')
+        output_format = '{time} {num_total} / {num_available} / {num_broken_down}\n'
+        file_obj.write(output_format.format(num_total=Machine.num_machines,
+                  num_available=AvailableMachine.num_available,
+                  num_broken_down=BrokenDownMachine.num_broken_down,
+                  time=current_time))
+    logging.debug(stats)
+    
+def get_todays_filename():
+    date = get_time_formatted('%d-%m-%y')
+    return date
+
+def find_statuses(soup):
+    for table in soup.find_all('table', class_='tb'):
+        for td in table.find_all('td', class_='p'):
+            name = td.find('b').get_text()
+            machine_id = get_machine_id(name)
+            status_text = ' '.join(list(td.children)[2:5:2])
+            machine = get_machine(machine_id, status_text)
+            yield machine
+            
+def get_time_formatted(time_format='%H:%M', timestamp=None):
+    if timestamp is None:
+        timestamp = time.time()
+    localtime = time.localtime(timestamp)
+    return time.strftime(time_format, localtime)
+
+def get_machine(machine_id, status):
+    machine = None
+    if status.startswith('Resttid: '):
+        machine = OccupiedMachine(machine_id)
+    elif status == 'Opptatt':
+        machine = OccupiedMachine(machine_id)
+    elif status.startswith('Ute av drift'):
+        machine = BrokenDownMachine(machine_id)
+    elif status.startswith('Ledig '):
+        machine = AvailableMachine(machine_id)
+    else:
+        machine = UnknownMachine(machine_id, status)
+    return machine
+
+class Machine(object):
+    machine_id = None
+    num_machines = 0
+    
+    def __init__(self, machine_id):
+        self.machine_id = machine_id
+        Machine.num_machines += 1
+        
+    def __str__(self):
+        return 'Machine #%2d' % self.machine_id
+    
+    def __repr__(self):
+        return self.__str__()
+    
+class BrokenDownMachine(Machine):
+    num_broken_down = 0
+    
+    def __init__(self, machine_id):
+        super(BrokenDownMachine, self).__init__(machine_id)
+        BrokenDownMachine.num_broken_down += 1
+
+class AvailableMachine(Machine):
+    num_available = 0
+    
+    def __init(self, machine_id):
+        super(AvailableMachine, self).__init__(machine_id)
+        AvailableMachine.num_available += 1
+
+class OccupiedMachine(Machine):
+    pass
+
+class UnknownMachine(Machine):
+    status = None
+    num_unknown = 0
+    
+    def __init__(self, machine_id, status):
+        super(UnknownMachine, self).__init__(machine_id)
+        self.status = status
+        UnknownMachine.num_unknown += 1
+        
 def get_machine_id(machine_name):
-    machine_num = int(machine_name.split()[1])
-    machine_id = 'Machine #%2d' % machine_num
+    machine_id = int(machine_name.split()[1])
     return machine_id
     
 def init():
