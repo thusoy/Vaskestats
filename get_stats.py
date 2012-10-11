@@ -24,34 +24,42 @@ Dependencies:
 Tarjei Husøy, 2012
 
 Licensed under a new-style BSD license, see LICENSE.txt.
-
-
 '''
-
-__author__ = 'Tarjei Husøy (admin@husoymedia.no)'
-__version__ = 0.2
-__copyright__ = 'Copyright (c) 2012 Tarjei Husøy'
-__licencse__ = 'BSD'
-__status__ = 'Development'
 
 from bs4 import BeautifulSoup
 from contextlib import closing
-import pickle
-import os
-import time
+from machine import *
 from urllib import request
 import logging
+import os
+import pickle
+import re
+import time
+
+__author__ = 'Tarjei Husøy (admin@husoymedia.no)'
+__version__ = 0.3
+__copyright__ = 'Copyright (c) 2012 Tarjei Husøy'
+__licencse__ = 'New-style BSD'
+__status__ = 'Development'
 
 URL = 'http://129.241.126.11/LaundryState?lg=2&ly=9106'
 LOGIN_DATA = 'C:/login_data.txt'
 DATA_DIR = 'data/'
 
+def init():
+    if not os.path.exists(DATA_DIR):
+        os.makedirs(DATA_DIR)
+    logging.basicConfig(filename='log.log', format='%(asctime)s %(levelname)-10s %(message)s', level=logging.DEBUG)
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    logging.getLogger('').addHandler(console)
+    
 def run():
     user, pw = get_user_and_pw()
     page = get_page(URL, user, pw)
     soup = BeautifulSoup(page)
-    logging.debug(page)
     stats = get_old_data()
+    logging.debug('Input data: ' + str(stats))
     analyze(soup, stats)
     save(stats)
     
@@ -75,12 +83,22 @@ def get_page(url, user, pw):
 def get_old_data():
     filename = get_todays_filename() + '.pickle'
     try:
-        with open(DATA_DIR + filename) as file_obj:
+        with open(DATA_DIR + filename, 'rb') as file_obj:
+            logging.info('Fould earlier data from today, reading...')
             return pickle.load(file_obj)
     except:
         # First run of the day
-        #TODO Old dumps will be aggregating, delete all except the last one.
+        logging.exception('Feil!')
+        logging.info('No earlier data from today found.')
+        delete_old_files(filename)
         return {}
+
+def delete_old_files(todays_filename):
+    pickles = re.compile("^(\d{1,2}-){2}(\d{2})\.pickle")
+    for file in os.listdir(DATA_DIR):
+        if pickles.match(file) and not file == todays_filename:
+            logging.debug('Deleting old file: ' + str(file))
+            os.remove(DATA_DIR + file)
 
 def analyze(soup, stats):
     for machine in find_statuses(soup):
@@ -120,14 +138,20 @@ def analyze(soup, stats):
             
 def save(stats):
     filename = get_todays_filename()
+    
+    #Save the stats
     with open(DATA_DIR + filename + '.txt', 'w+') as file_obj:
         machines = sorted(stats.keys(), key=lambda m: m.machine_id)
         for machine in machines:
             file_obj.write('%s: ' % machine)
             file_obj.write(', '.join(str(entry) for entry in stats[machine]))
             file_obj.write('\n')
+            
+    # Save the pickled stats
     with open(DATA_DIR + filename + '.pickle', 'wb+') as file_obj:
         pickle.dump(stats, file_obj)
+        
+    # Save the counts
     with open(DATA_DIR + 'counter.txt', 'a') as file_obj:
         current_time = get_time_formatted('%d.%m.%y %H:%M')
         output_format = '{time} {num_total} / {num_available} / {num_broken_down}\n'
@@ -135,7 +159,7 @@ def save(stats):
                   num_available=AvailableMachine.num_available,
                   num_broken_down=BrokenDownMachine.num_broken_down,
                   time=current_time))
-    logging.debug(stats)
+    logging.debug('Output data: ' + str(stats))
     
 def get_todays_filename():
     date = get_time_formatted('%d-%m-%y')
@@ -170,60 +194,11 @@ def get_machine(machine_id, status):
         machine = UnknownMachine(machine_id, status)
     return machine
 
-class Machine(object):
-    machine_id = None
-    num_machines = 0
-    
-    def __init__(self, machine_id):
-        self.machine_id = machine_id
-        Machine.num_machines += 1
-        
-    def __str__(self):
-        return 'Machine #%2d' % self.machine_id
-    
-    def __repr__(self):
-        return self.__str__()
-    
-class BrokenDownMachine(Machine):
-    num_broken_down = 0
-    
-    def __init__(self, machine_id):
-        super(BrokenDownMachine, self).__init__(machine_id)
-        BrokenDownMachine.num_broken_down += 1
-
-class AvailableMachine(Machine):
-    num_available = 0
-    
-    def __init(self, machine_id):
-        super(AvailableMachine, self).__init__(machine_id)
-        AvailableMachine.num_available += 1
-
-class OccupiedMachine(Machine):
-    pass
-
-class UnknownMachine(Machine):
-    status = None
-    num_unknown = 0
-    
-    def __init__(self, machine_id, status):
-        super(UnknownMachine, self).__init__(machine_id)
-        self.status = status
-        UnknownMachine.num_unknown += 1
-        
-def get_machine_id(machine_name):
-    machine_id = int(machine_name.split()[1])
-    return machine_id
-    
-def init():
-    if not os.path.exists(DATA_DIR):
-        os.makedirs(DATA_DIR)
-    logging.basicConfig(filename='log.log', format='%(asctime)s %(levelname)s: %(message)s', level=logging.DEBUG)
-    logging.info('Starting data mining.')
-        
 if __name__ == '__main__':
     init()
     try:
+        logging.info('Starting data mining.')
         run()
-        logging.info('Completed successfully.')
+        logging.info('Completed successfully.\n')
     except:
         logging.exception('Something failed.')
