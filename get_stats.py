@@ -29,7 +29,12 @@ Licensed under a new-style BSD license, see LICENSE.txt.
 from bs4 import BeautifulSoup
 from contextlib import closing
 from machine import *
-from urllib import request
+try:
+    #python 3
+    from urllib import request as url_src
+except ImportError:
+    #python 2
+    import urllib2 as url_src
 import logging
 import os
 import pickle
@@ -72,12 +77,12 @@ def get_user_and_pw():
         return user, pw
     
 def get_page(url, user, pw):
-    password_manager = request.HTTPPasswordMgrWithDefaultRealm()
+    password_manager = url_src.HTTPPasswordMgrWithDefaultRealm()
     password_manager.add_password(None, url, user, pw)
-    authhandler = request.HTTPDigestAuthHandler(password_manager)
-    opener = request.build_opener(authhandler)
-    request.install_opener(opener)
-    with closing(request.urlopen(url)) as response:
+    authhandler = url_src.HTTPDigestAuthHandler(password_manager)
+    opener = url_src.build_opener(authhandler)
+    url_src.install_opener(opener)
+    with closing(url_src.urlopen(url)) as response:
         return response.read()
         
 def get_old_data():
@@ -88,7 +93,6 @@ def get_old_data():
             return pickle.load(file_obj)
     except:
         # First run of the day
-        logging.exception('Feil!')
         logging.info('No earlier data from today found.')
         delete_old_files(filename)
         return {}
