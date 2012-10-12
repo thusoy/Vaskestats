@@ -29,17 +29,18 @@ Licensed under a new-style BSD license, see LICENSE.txt.
 from bs4 import BeautifulSoup
 from contextlib import closing
 from machine import *
+import logging
+import os
+import pickle
+import re
+import sys
+import time
 try:
     #python 3
     from urllib import request as url_src
 except ImportError:
     #python 2
     import urllib2 as url_src
-import logging
-import os
-import pickle
-import re
-import time
 
 __author__ = 'Tarjei Husøy (admin@husoymedia.no)'
 __version__ = 0.3
@@ -174,7 +175,11 @@ def find_statuses(soup):
         for td in table.find_all('td', class_='p'):
             name = td.find('b').get_text()
             machine_id = get_machine_id(name)
-            status_text = ' '.join(list(td.children)[2:5:2])
+            print(list(td.children))
+            if sys.version_info[0] >= 3:
+                status_text = ' '.join(list(td.children)[2:-1:2])
+            else:
+                status_text = list(td.children)[1].get_text()
             machine = get_machine(machine_id, status_text)
             yield machine
             
