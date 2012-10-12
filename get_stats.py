@@ -206,7 +206,7 @@ def get_machine(machine_id, status):
         machine = BrokenDownMachine(machine_id)
     elif status.startswith('Ledig '):
         machine = AvailableMachine(machine_id)
-    elif status.startswith('Stenger'):
+    elif status.startswith('Steng'):
         machine = ClosedMachine(machine_id)
     else:
         machine = UnknownMachine(machine_id, status)
