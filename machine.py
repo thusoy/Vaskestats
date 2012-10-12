@@ -31,6 +31,9 @@ class AvailableMachine(Machine):
 class OccupiedMachine(Machine):
     pass
 
+class ClosedMachine(Machine):
+    pass
+
 class UnknownMachine(Machine):
     status = None
     num_unknown = 0

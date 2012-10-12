@@ -48,7 +48,7 @@ __licencse__ = 'New-style BSD'
 __status__ = 'Development'
 
 URL = 'http://129.241.126.11/LaundryState?lg=2&ly=9106'
-LOGIN_DATA = 'C:/login_data.txt'
+LOGIN_DATA = 'login_data.txt'
 DATA_DIR = 'data/'
 
 def init():
@@ -107,8 +107,9 @@ def delete_old_files(todays_filename):
 def analyze(soup, stats):
     for machine in find_statuses(soup):
         times_occupied = stats.get(machine, [])
+        machine_running = bool(times_occupied and times_occupied[-1][1] is None)
         if isinstance(machine, OccupiedMachine):
-            if times_occupied and times_occupied[-1][1] is None:
+            if machine_running:
                 # Still running
                 logging.info('%s is still running.', machine)
             else:
@@ -118,7 +119,7 @@ def analyze(soup, stats):
                 logging.info('%s has been started.', machine)
                 times_occupied.append(stat_entry)
         elif isinstance(machine, AvailableMachine):
-            if times_occupied and times_occupied[-1][1] is None:
+            if machine_running:
                 # Last time we checked it was running
                 logging.info('%s has finished, and is available.', machine)
                 last_entry = times_occupied[-1]
@@ -138,6 +139,16 @@ def analyze(soup, stats):
                 logging.info('%s has broken down.', machine)
         elif isinstance(machine, UnknownMachine):
             logging.warning('%s has an unknown status: %s', machine, machine.status)
+        elif isinstance(machine, ClosedMachine):
+            if machine_running:
+                last_entry = times_occupied[-1]
+                del times_occupied[-1]
+                new_entry = (last_entry[0], get_time_formatted())
+                times_occupied.append(new_entry)
+                logging.info('%s is finishing final run before closing.', machine)
+            else:
+                logging.info('%s is closed.', machine)
+                
         stats[machine] = times_occupied
             
 def save(stats):
@@ -174,7 +185,6 @@ def find_statuses(soup):
         for td in table.find_all('td', class_='p'):
             name = td.find('b').get_text()
             machine_id = get_machine_id(name)
-            print(list(td.children))
             if sys.version_info[0] >= 3:
                 status_text = ' '.join(list(td.children)[2:-1:2])
             else:
@@ -190,14 +200,14 @@ def get_time_formatted(time_format='%H:%M', timestamp=None):
 
 def get_machine(machine_id, status):
     machine = None
-    if status.startswith('Resttid: '):
-        machine = OccupiedMachine(machine_id)
-    elif status == 'Opptatt':
+    if status.startswith('Resttid: ') or status == 'Opptatt':
         machine = OccupiedMachine(machine_id)
     elif status.startswith('Ute av drift'):
         machine = BrokenDownMachine(machine_id)
     elif status.startswith('Ledig '):
         machine = AvailableMachine(machine_id)
+    elif status.startswith('Stenger'):
+        machine = ClosedMachine(machine_id)
     else:
         machine = UnknownMachine(machine_id, status)
     return machine
