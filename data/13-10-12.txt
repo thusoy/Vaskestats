@@ -1,16 +1,16 @@
 Machine # 1: 
 Machine # 2: 
-Machine # 3: ('13:49', '14:02')
-Machine # 4: ('13:44', '14:02')
+Machine # 3: ('13:49', '14:02'), ('15:03', None)
+Machine # 4: ('13:44', '14:02'), ('15:03', None)
 Machine # 5: ('14:02', '14:52')
 Machine # 6: ('13:59', '14:22')
 Machine # 7: ('14:02', '14:52')
 Machine # 8: ('13:54', '14:22')
 Machine # 9: ('13:55', '14:39')
-Machine #10: 
-Machine #11: ('13:53', '14:52')
-Machine #12: 
-Machine #13: ('14:22', None)
+Machine #10: ('15:10', None)
+Machine #11: ('13:53', '14:52'), ('15:10', None)
+Machine #12: ('15:10', None)
+Machine #13: ('14:22', '15:04')
 Machine #14: ('13:53', '14:02'), ('14:39', None)
 Machine #15: Ute av drift
 Machine #16: ('14:39', None)

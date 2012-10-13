@@ -48,14 +48,14 @@ __licencse__ = 'New-style BSD'
 __status__ = 'Development'
 
 URL = 'http://129.241.126.11/LaundryState?lg=2&ly=9106'
-LOGIN_DATA = '/home/ubuntu/Vaskestats/login_data.txt'
-DATA_DIR = '/home/ubuntu/Vaskestats/data/'
-LOG_FILE = '/home/ubuntu/Vaskestats/log.log'
+LOGIN_DATA = 'login_data.txt'
+DATA_DIR = 'data/'
+LOG_FILE = 'log.log'
 
 def init():
     if not os.path.exists(DATA_DIR):
         os.makedirs(DATA_DIR)
-    logging.basicConfig(filename=LOG_FILE, format='%(asctime)s %(levelname)-10s %(message)s', level=logging.DEBUG)
+    logging.basicConfig(filename=LOG_FILE, format='%(asctime)s %(levelname)-10s %(message)s', level=logging.INFO)
     console = logging.StreamHandler()
     console.setLevel(logging.INFO)
     logging.getLogger('').addHandler(console)

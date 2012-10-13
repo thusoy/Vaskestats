@@ -349,3 +349,236 @@
 2012-10-13 15:02:02,561 DEBUG      Output data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02')], Machine # 4: [('13:44', '14:02')], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', None)], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
 2012-10-13 15:02:02,561 INFO       Completed successfully.
 
+2012-10-13 15:03:01,675 INFO       Starting data mining.
+2012-10-13 15:03:01,675 INFO       Using account 'tarjeikl'.
+2012-10-13 15:03:02,368 INFO       Fould earlier data from today, reading...
+2012-10-13 15:03:02,369 DEBUG      Input data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02')], Machine # 4: [('13:44', '14:02')], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', None)], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 15:03:02,376 INFO       Machine # 1 is available
+2012-10-13 15:03:02,376 INFO       Machine # 2 is available
+2012-10-13 15:03:02,376 INFO       Machine # 3 has been started.
+2012-10-13 15:03:02,376 INFO       Machine # 4 has been started.
+2012-10-13 15:03:02,376 INFO       Machine # 5 is available
+2012-10-13 15:03:02,377 INFO       Machine # 6 is available
+2012-10-13 15:03:02,377 INFO       Machine # 7 is available
+2012-10-13 15:03:02,378 INFO       Machine # 8 is available
+2012-10-13 15:03:02,379 INFO       Machine # 9 is available
+2012-10-13 15:03:02,379 INFO       Machine #10 is available
+2012-10-13 15:03:02,379 INFO       Machine #11 is available
+2012-10-13 15:03:02,379 INFO       Machine #12 is available
+2012-10-13 15:03:02,380 INFO       Machine #13 is still running.
+2012-10-13 15:03:02,380 INFO       Machine #14 is still running.
+2012-10-13 15:03:02,381 INFO       Machine #15 is still broken down.
+2012-10-13 15:03:02,381 INFO       Machine #16 is still running.
+2012-10-13 15:03:02,381 INFO       Machine #17 is still running.
+2012-10-13 15:03:02,381 INFO       Machine #18 is available
+2012-10-13 15:03:02,382 INFO       Machine #19 is available
+2012-10-13 15:03:02,382 INFO       Machine #20 is available
+2012-10-13 15:03:02,384 DEBUG      Output data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02'), ('15:03', None)], Machine # 4: [('13:44', '14:02'), ('15:03', None)], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', None)], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 15:03:02,384 INFO       Completed successfully.
+
+2012-10-13 15:04:01,122 INFO       Starting data mining.
+2012-10-13 15:04:01,122 INFO       Using account 'tarjeikl'.
+2012-10-13 15:04:01,822 INFO       Fould earlier data from today, reading...
+2012-10-13 15:04:01,824 DEBUG      Input data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02'), ('15:03', None)], Machine # 4: [('13:44', '14:02'), ('15:03', None)], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', None)], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 15:04:01,830 INFO       Machine # 1 is available
+2012-10-13 15:04:01,830 INFO       Machine # 2 is available
+2012-10-13 15:04:01,830 INFO       Machine # 3 is still running.
+2012-10-13 15:04:01,830 INFO       Machine # 4 is still running.
+2012-10-13 15:04:01,830 INFO       Machine # 5 is available
+2012-10-13 15:04:01,831 INFO       Machine # 6 is available
+2012-10-13 15:04:01,831 INFO       Machine # 7 is available
+2012-10-13 15:04:01,832 INFO       Machine # 8 is available
+2012-10-13 15:04:01,832 INFO       Machine # 9 is available
+2012-10-13 15:04:01,832 INFO       Machine #10 is available
+2012-10-13 15:04:01,833 INFO       Machine #11 is available
+2012-10-13 15:04:01,833 INFO       Machine #12 is available
+2012-10-13 15:04:01,834 INFO       Machine #13 has finished, and is available.
+2012-10-13 15:04:01,834 INFO       Machine #14 is still running.
+2012-10-13 15:04:01,834 INFO       Machine #15 is still broken down.
+2012-10-13 15:04:01,834 INFO       Machine #16 is still running.
+2012-10-13 15:04:01,835 INFO       Machine #17 is still running.
+2012-10-13 15:04:01,835 INFO       Machine #18 is available
+2012-10-13 15:04:01,835 INFO       Machine #19 is available
+2012-10-13 15:04:01,836 INFO       Machine #20 is available
+2012-10-13 15:04:01,838 DEBUG      Output data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02'), ('15:03', None)], Machine # 4: [('13:44', '14:02'), ('15:03', None)], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', '15:04')], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 15:04:01,838 INFO       Completed successfully.
+
+2012-10-13 15:05:01,923 INFO       Starting data mining.
+2012-10-13 15:05:01,923 INFO       Using account 'tarjeikl'.
+2012-10-13 15:05:02,600 INFO       Fould earlier data from today, reading...
+2012-10-13 15:05:02,602 DEBUG      Input data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02'), ('15:03', None)], Machine # 4: [('13:44', '14:02'), ('15:03', None)], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', '15:04')], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 15:05:02,607 INFO       Machine # 1 is available
+2012-10-13 15:05:02,608 INFO       Machine # 2 is available
+2012-10-13 15:05:02,608 INFO       Machine # 3 is still running.
+2012-10-13 15:05:02,608 INFO       Machine # 4 is still running.
+2012-10-13 15:05:02,608 INFO       Machine # 5 is available
+2012-10-13 15:05:02,609 INFO       Machine # 6 is available
+2012-10-13 15:05:02,609 INFO       Machine # 7 is available
+2012-10-13 15:05:02,610 INFO       Machine # 8 is available
+2012-10-13 15:05:02,610 INFO       Machine # 9 is available
+2012-10-13 15:05:02,611 INFO       Machine #10 is available
+2012-10-13 15:05:02,611 INFO       Machine #11 is available
+2012-10-13 15:05:02,611 INFO       Machine #12 is available
+2012-10-13 15:05:02,612 INFO       Machine #13 is available
+2012-10-13 15:05:02,612 INFO       Machine #14 is still running.
+2012-10-13 15:05:02,613 INFO       Machine #15 is still broken down.
+2012-10-13 15:05:02,613 INFO       Machine #16 is still running.
+2012-10-13 15:05:02,613 INFO       Machine #17 is still running.
+2012-10-13 15:05:02,613 INFO       Machine #18 is available
+2012-10-13 15:05:02,614 INFO       Machine #19 is available
+2012-10-13 15:05:02,614 INFO       Machine #20 is available
+2012-10-13 15:05:02,616 DEBUG      Output data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02'), ('15:03', None)], Machine # 4: [('13:44', '14:02'), ('15:03', None)], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', '15:04')], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 15:05:02,616 INFO       Completed successfully.
+
+2012-10-13 15:06:01,694 INFO       Starting data mining.
+2012-10-13 15:06:01,694 INFO       Using account 'tarjeikl'.
+2012-10-13 15:06:02,433 INFO       Fould earlier data from today, reading...
+2012-10-13 15:06:02,434 DEBUG      Input data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02'), ('15:03', None)], Machine # 4: [('13:44', '14:02'), ('15:03', None)], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', '15:04')], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 15:06:02,440 INFO       Machine # 1 is available
+2012-10-13 15:06:02,440 INFO       Machine # 2 is available
+2012-10-13 15:06:02,440 INFO       Machine # 3 is still running.
+2012-10-13 15:06:02,440 INFO       Machine # 4 is still running.
+2012-10-13 15:06:02,440 INFO       Machine # 5 is available
+2012-10-13 15:06:02,441 INFO       Machine # 6 is available
+2012-10-13 15:06:02,441 INFO       Machine # 7 is available
+2012-10-13 15:06:02,443 INFO       Machine # 8 is available
+2012-10-13 15:06:02,443 INFO       Machine # 9 is available
+2012-10-13 15:06:02,443 INFO       Machine #10 is available
+2012-10-13 15:06:02,443 INFO       Machine #11 is available
+2012-10-13 15:06:02,443 INFO       Machine #12 is available
+2012-10-13 15:06:02,445 INFO       Machine #13 is available
+2012-10-13 15:06:02,445 INFO       Machine #14 is still running.
+2012-10-13 15:06:02,445 INFO       Machine #15 is still broken down.
+2012-10-13 15:06:02,445 INFO       Machine #16 is still running.
+2012-10-13 15:06:02,445 INFO       Machine #17 is still running.
+2012-10-13 15:06:02,446 INFO       Machine #18 is available
+2012-10-13 15:06:02,446 INFO       Machine #19 is available
+2012-10-13 15:06:02,446 INFO       Machine #20 is available
+2012-10-13 15:06:02,449 DEBUG      Output data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02'), ('15:03', None)], Machine # 4: [('13:44', '14:02'), ('15:03', None)], Machine # 5: [('14:02', '14:52')], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', '14:52')], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', '14:52')], Machine #12: [], Machine #13: [('14:22', '15:04')], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 15:06:02,449 INFO       Completed successfully.
+
+2012-10-13 15:07:01,531 INFO       Starting data mining.
+2012-10-13 15:07:01,531 INFO       Using account 'tarjeikl'.
+2012-10-13 15:07:02,221 INFO       Fould earlier data from today, reading...
+2012-10-13 15:07:02,228 INFO       Machine # 1 is available
+2012-10-13 15:07:02,229 INFO       Machine # 2 is available
+2012-10-13 15:07:02,229 INFO       Machine # 3 is still running.
+2012-10-13 15:07:02,229 INFO       Machine # 4 is still running.
+2012-10-13 15:07:02,229 INFO       Machine # 5 is available
+2012-10-13 15:07:02,230 INFO       Machine # 6 is available
+2012-10-13 15:07:02,230 INFO       Machine # 7 is available
+2012-10-13 15:07:02,231 INFO       Machine # 8 is available
+2012-10-13 15:07:02,232 INFO       Machine # 9 is available
+2012-10-13 15:07:02,232 INFO       Machine #10 is available
+2012-10-13 15:07:02,232 INFO       Machine #11 is available
+2012-10-13 15:07:02,232 INFO       Machine #12 is available
+2012-10-13 15:07:02,234 INFO       Machine #13 is available
+2012-10-13 15:07:02,234 INFO       Machine #14 is still running.
+2012-10-13 15:07:02,234 INFO       Machine #15 is still broken down.
+2012-10-13 15:07:02,234 INFO       Machine #16 is still running.
+2012-10-13 15:07:02,235 INFO       Machine #17 is still running.
+2012-10-13 15:07:02,235 INFO       Machine #18 is available
+2012-10-13 15:07:02,235 INFO       Machine #19 is available
+2012-10-13 15:07:02,235 INFO       Machine #20 is available
+2012-10-13 15:07:02,237 INFO       Completed successfully.
+
+2012-10-13 15:08:01,332 INFO       Starting data mining.
+2012-10-13 15:08:01,332 INFO       Using account 'tarjeikl'.
+2012-10-13 15:08:02,069 INFO       Fould earlier data from today, reading...
+2012-10-13 15:08:02,091 INFO       Machine # 1 is available
+2012-10-13 15:08:02,091 INFO       Machine # 2 is available
+2012-10-13 15:08:02,092 INFO       Machine # 3 is still running.
+2012-10-13 15:08:02,092 INFO       Machine # 4 is still running.
+2012-10-13 15:08:02,092 INFO       Machine # 5 is available
+2012-10-13 15:08:02,093 INFO       Machine # 6 is available
+2012-10-13 15:08:02,093 INFO       Machine # 7 is available
+2012-10-13 15:08:02,094 INFO       Machine # 8 is available
+2012-10-13 15:08:02,094 INFO       Machine # 9 is available
+2012-10-13 15:08:02,094 INFO       Machine #10 is available
+2012-10-13 15:08:02,094 INFO       Machine #11 is available
+2012-10-13 15:08:02,094 INFO       Machine #12 is available
+2012-10-13 15:08:02,096 INFO       Machine #13 is available
+2012-10-13 15:08:02,096 INFO       Machine #14 is still running.
+2012-10-13 15:08:02,096 INFO       Machine #15 is still broken down.
+2012-10-13 15:08:02,096 INFO       Machine #16 is still running.
+2012-10-13 15:08:02,096 INFO       Machine #17 is still running.
+2012-10-13 15:08:02,096 INFO       Machine #18 is available
+2012-10-13 15:08:02,097 INFO       Machine #19 is available
+2012-10-13 15:08:02,097 INFO       Machine #20 is available
+2012-10-13 15:08:02,099 INFO       Completed successfully.
+
+2012-10-13 15:09:01,190 INFO       Starting data mining.
+2012-10-13 15:09:01,190 INFO       Using account 'tarjeikl'.
+2012-10-13 15:09:01,887 INFO       Fould earlier data from today, reading...
+2012-10-13 15:09:01,893 INFO       Machine # 1 is available
+2012-10-13 15:09:01,893 INFO       Machine # 2 is available
+2012-10-13 15:09:01,893 INFO       Machine # 3 is still running.
+2012-10-13 15:09:01,894 INFO       Machine # 4 is still running.
+2012-10-13 15:09:01,894 INFO       Machine # 5 is available
+2012-10-13 15:09:01,894 INFO       Machine # 6 is available
+2012-10-13 15:09:01,894 INFO       Machine # 7 is available
+2012-10-13 15:09:01,896 INFO       Machine # 8 is available
+2012-10-13 15:09:01,896 INFO       Machine # 9 is available
+2012-10-13 15:09:01,896 INFO       Machine #10 is available
+2012-10-13 15:09:01,896 INFO       Machine #11 is available
+2012-10-13 15:09:01,896 INFO       Machine #12 is available
+2012-10-13 15:09:01,898 INFO       Machine #13 is available
+2012-10-13 15:09:01,899 INFO       Machine #14 is still running.
+2012-10-13 15:09:01,899 INFO       Machine #15 is still broken down.
+2012-10-13 15:09:01,900 INFO       Machine #16 is still running.
+2012-10-13 15:09:01,900 INFO       Machine #17 is still running.
+2012-10-13 15:09:01,900 INFO       Machine #18 is available
+2012-10-13 15:09:01,900 INFO       Machine #19 is available
+2012-10-13 15:09:01,901 INFO       Machine #20 is available
+2012-10-13 15:09:01,903 INFO       Completed successfully.
+
+2012-10-13 15:10:01,992 INFO       Starting data mining.
+2012-10-13 15:10:01,992 INFO       Using account 'tarjeikl'.
+2012-10-13 15:10:02,696 INFO       Fould earlier data from today, reading...
+2012-10-13 15:10:02,702 INFO       Machine # 1 is available
+2012-10-13 15:10:02,703 INFO       Machine # 2 is available
+2012-10-13 15:10:02,703 INFO       Machine # 3 is still running.
+2012-10-13 15:10:02,703 INFO       Machine # 4 is still running.
+2012-10-13 15:10:02,703 INFO       Machine # 5 is available
+2012-10-13 15:10:02,704 INFO       Machine # 6 is available
+2012-10-13 15:10:02,704 INFO       Machine # 7 is available
+2012-10-13 15:10:02,705 INFO       Machine # 8 is available
+2012-10-13 15:10:02,705 INFO       Machine # 9 is available
+2012-10-13 15:10:02,705 INFO       Machine #10 has been started.
+2012-10-13 15:10:02,705 INFO       Machine #11 has been started.
+2012-10-13 15:10:02,705 INFO       Machine #12 has been started.
+2012-10-13 15:10:02,707 INFO       Machine #13 is available
+2012-10-13 15:10:02,707 INFO       Machine #14 is still running.
+2012-10-13 15:10:02,707 INFO       Machine #15 is still broken down.
+2012-10-13 15:10:02,707 INFO       Machine #16 is still running.
+2012-10-13 15:10:02,707 INFO       Machine #17 is still running.
+2012-10-13 15:10:02,707 INFO       Machine #18 is available
+2012-10-13 15:10:02,708 INFO       Machine #19 is available
+2012-10-13 15:10:02,708 INFO       Machine #20 is available
+2012-10-13 15:10:02,710 INFO       Completed successfully.
+
+2012-10-13 15:11:01,794 INFO       Starting data mining.
+2012-10-13 15:11:01,794 INFO       Using account 'tarjeikl'.
+2012-10-13 15:11:02,502 INFO       Fould earlier data from today, reading...
+2012-10-13 15:11:02,509 INFO       Machine # 1 is available
+2012-10-13 15:11:02,509 INFO       Machine # 2 is available
+2012-10-13 15:11:02,509 INFO       Machine # 3 is still running.
+2012-10-13 15:11:02,509 INFO       Machine # 4 is still running.
+2012-10-13 15:11:02,509 INFO       Machine # 5 is available
+2012-10-13 15:11:02,510 INFO       Machine # 6 is available
+2012-10-13 15:11:02,510 INFO       Machine # 7 is available
+2012-10-13 15:11:02,511 INFO       Machine # 8 is available
+2012-10-13 15:11:02,512 INFO       Machine # 9 is available
+2012-10-13 15:11:02,512 INFO       Machine #10 is still running.
+2012-10-13 15:11:02,512 INFO       Machine #11 is still running.
+2012-10-13 15:11:02,512 INFO       Machine #12 is still running.
+2012-10-13 15:11:02,513 INFO       Machine #13 is available
+2012-10-13 15:11:02,514 INFO       Machine #14 is still running.
+2012-10-13 15:11:02,514 INFO       Machine #15 is still broken down.
+2012-10-13 15:11:02,514 INFO       Machine #16 is still running.
+2012-10-13 15:11:02,514 INFO       Machine #17 is still running.
+2012-10-13 15:11:02,514 INFO       Machine #18 is available
+2012-10-13 15:11:02,515 INFO       Machine #19 is available
+2012-10-13 15:11:02,515 INFO       Machine #20 is available
+2012-10-13 15:11:02,517 INFO       Completed successfully.
+
