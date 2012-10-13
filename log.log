@@ -25,3 +25,30 @@
 2012-10-13 14:22:01,152 DEBUG      Output data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02')], Machine # 4: [('13:44', '14:02')], Machine # 5: [('14:02', None)], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', None)], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', None)], Machine #10: [], Machine #11: [('13:53', None)], Machine #12: [], Machine #13: [('14:22', None)], Machine #14: [('13:53', '14:02')], Machine #15: ['Ute av drift'], Machine #16: [], Machine #17: [('13:44', '14:02')], Machine #18: [('14:02', None)], Machine #19: [('14:05', None)], Machine #20: []}
 2012-10-13 14:22:01,152 INFO       Completed successfully.
 
+2012-10-13 14:39:45,505 INFO       Starting data mining.
+2012-10-13 14:39:45,505 INFO       Using account 'tarjeikl'.
+2012-10-13 14:39:46,193 INFO       Fould earlier data from today, reading...
+2012-10-13 14:39:46,195 DEBUG      Input data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02')], Machine # 4: [('13:44', '14:02')], Machine # 5: [('14:02', None)], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', None)], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', None)], Machine #10: [], Machine #11: [('13:53', None)], Machine #12: [], Machine #13: [('14:22', None)], Machine #14: [('13:53', '14:02')], Machine #15: ['Ute av drift'], Machine #16: [], Machine #17: [('13:44', '14:02')], Machine #18: [('14:02', None)], Machine #19: [('14:05', None)], Machine #20: []}
+2012-10-13 14:39:46,200 INFO       Machine # 1 is available
+2012-10-13 14:39:46,200 INFO       Machine # 2 is available
+2012-10-13 14:39:46,201 INFO       Machine # 3 is available
+2012-10-13 14:39:46,201 INFO       Machine # 4 is available
+2012-10-13 14:39:46,201 INFO       Machine # 5 is still running.
+2012-10-13 14:39:46,202 INFO       Machine # 6 is available
+2012-10-13 14:39:46,202 INFO       Machine # 7 is still running.
+2012-10-13 14:39:46,203 INFO       Machine # 8 is available
+2012-10-13 14:39:46,203 INFO       Machine # 9 has finished, and is available.
+2012-10-13 14:39:46,203 INFO       Machine #10 is available
+2012-10-13 14:39:46,204 INFO       Machine #11 is still running.
+2012-10-13 14:39:46,204 INFO       Machine #12 is available
+2012-10-13 14:39:46,205 INFO       Machine #13 is still running.
+2012-10-13 14:39:46,205 INFO       Machine #14 has been started.
+2012-10-13 14:39:46,205 INFO       Machine #15 is still broken down.
+2012-10-13 14:39:46,206 INFO       Machine #16 has been started.
+2012-10-13 14:39:46,206 INFO       Machine #17 has been started.
+2012-10-13 14:39:46,206 INFO       Machine #18 has finished, and is available.
+2012-10-13 14:39:46,207 INFO       Machine #19 has finished, and is available.
+2012-10-13 14:39:46,207 INFO       Machine #20 is available
+2012-10-13 14:39:46,209 DEBUG      Output data: {Machine # 1: [], Machine # 2: [], Machine # 3: [('13:49', '14:02')], Machine # 4: [('13:44', '14:02')], Machine # 5: [('14:02', None)], Machine # 6: [('13:59', '14:22')], Machine # 7: [('14:02', None)], Machine # 8: [('13:54', '14:22')], Machine # 9: [('13:55', '14:39')], Machine #10: [], Machine #11: [('13:53', None)], Machine #12: [], Machine #13: [('14:22', None)], Machine #14: [('13:53', '14:02'), ('14:39', None)], Machine #15: ['Ute av drift'], Machine #16: [('14:39', None)], Machine #17: [('13:44', '14:02'), ('14:39', None)], Machine #18: [('14:02', '14:39')], Machine #19: [('14:05', '14:39')], Machine #20: []}
+2012-10-13 14:39:46,209 INFO       Completed successfully.
+
