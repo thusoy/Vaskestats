@@ -20,6 +20,12 @@ class Machine(object):
     def __eq__(self, other):
 	return self.machine_id == other.machine_id
     
+    def __hash__(self):
+        return self.machine_id.__hash__()
+    
+    def __eq__(self, other):
+        return self.machine_id == other.machine_id
+    
 class BrokenDownMachine(Machine):
     num_broken_down = 0
     
