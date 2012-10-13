@@ -14,6 +14,12 @@ class Machine(object):
     def __repr__(self):
         return self.__str__()
     
+    def __hash__(self):
+        return self.machine_id.__hash__()
+    
+    def __eq__(self, other):
+        return self.machine_id == other.machine_id
+    
 class BrokenDownMachine(Machine):
     num_broken_down = 0
     
@@ -24,7 +30,7 @@ class BrokenDownMachine(Machine):
 class AvailableMachine(Machine):
     num_available = 0
     
-    def __init(self, machine_id):
+    def __init__(self, machine_id):
         super(AvailableMachine, self).__init__(machine_id)
         AvailableMachine.num_available += 1
 
