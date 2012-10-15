@@ -1,0 +1,80 @@
+Machine # 1: 
+Machine # 1: 
+Machine # 1: 
+Machine # 1: 
+Machine # 2: 
+Machine # 2: 
+Machine # 2: 
+Machine # 2: 
+Machine # 3: 
+Machine # 3: 
+Machine # 3: 
+Machine # 3: 
+Machine # 4: 
+Machine # 4: 
+Machine # 4: 
+Machine # 4: 
+Machine # 5: 
+Machine # 5: 
+Machine # 5: 
+Machine # 5: 
+Machine # 6: 
+Machine # 6: 
+Machine # 6: 
+Machine # 6: 
+Machine # 7: 
+Machine # 7: 
+Machine # 7: 
+Machine # 7: 
+Machine # 8: 
+Machine # 8: 
+Machine # 8: 
+Machine # 8: 
+Machine # 9: 
+Machine # 9: 
+Machine # 9: 
+Machine # 9: 
+Machine #10: 
+Machine #10: 
+Machine #10: 
+Machine #10: 
+Machine #11: 
+Machine #11: 
+Machine #11: 
+Machine #11: 
+Machine #12: 
+Machine #12: 
+Machine #12: 
+Machine #12: 
+Machine #13: 
+Machine #13: 
+Machine #13: 
+Machine #13: 
+Machine #14: 
+Machine #14: 
+Machine #14: 
+Machine #14: 
+Machine #15: Ute av drift
+Machine #15: Ute av drift
+Machine #15: Ute av drift
+Machine #15: Ute av drift
+Machine #16: 
+Machine #16: 
+Machine #16: 
+Machine #16: 
+Machine #17: 
+Machine #17: 
+Machine #17: 
+Machine #17: 
+Machine #18: 
+Machine #18: 
+Machine #18: 
+Machine #18: 
+Machine #19: 
+Machine #19: 
+Machine #19: 
+Machine #19: 
+Machine #20: 
+Machine #20: 
+Machine #20: 
+Machine #20: 
