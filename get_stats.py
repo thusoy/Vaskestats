@@ -12,7 +12,7 @@ stats[machine_id] = [(starttime, endtime), (starttime2, endtime2)]
 or, in the event that a wash isnt completed yet, the last entry for a machine is the tuple (starttime, None).
 
 A pure counter is written, in the format 
-    {timestamp} {num_machines } / {num_occupied} / {num_broken_down}
+    {timestamp} {num_machines } / {num_available} / {num_broken_down}
     
 A pickled dump of the data is also written, to ease appending data during the day.
 
