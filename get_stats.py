@@ -99,7 +99,7 @@ def get_old_data():
         return {}
 
 def delete_old_files(todays_filename):
-    pickles = re.compile("^(\d{1,2}-){2}(\d{2})\.pickle")
+    pickles = re.compile("^(\d{1,4}.){2}(\d{2})\.pickle")
     for file in os.listdir(DATA_DIR):
         if pickles.match(file) and not file == todays_filename:
             logging.debug('Deleting old file: ' + str(file))
@@ -154,6 +154,7 @@ def analyze(soup, stats):
             
 def save(stats):
     filename = get_todays_filename()
+    month_filename = get_months_filename()
     
     #Save the stats
     with open(DATA_DIR + filename + '.txt', 'w+') as file_obj:
@@ -168,7 +169,7 @@ def save(stats):
         pickle.dump(stats, file_obj)
         
     # Save the counts
-    with open(DATA_DIR + 'counter.txt', 'a') as file_obj:
+    with open(DATA_DIR + month_filename + '.txt', 'a') as file_obj:
         current_time = get_time_formatted('%d.%m.%y %H:%M')
         output_format = '{time} {num_total} / {num_available} / {num_broken_down}\n'
         file_obj.write(output_format.format(num_total=Machine.num_machines,
@@ -178,8 +179,12 @@ def save(stats):
     logging.debug('Output data: ' + str(stats))
     
 def get_todays_filename():
-    date = get_time_formatted('%d-%m-%y')
+    date = get_time_formatted('%y.%m.%d')
     return date
+
+def get_months_filename():
+    date = get_time_formatted('%Y.%m')
+    return '%s - counter' % date
 
 def find_statuses(soup):
     for table in soup.find_all('table', class_='tb'):
